@@ -6,7 +6,7 @@ public abstract class Device
     
     public int Id { get; private set; }
     public string Name { get; set; }
-    public bool IsAvailable { get; set; } = true;
+    public bool IsAvailable { get; set; }
 
     protected Device(string name)
     {
