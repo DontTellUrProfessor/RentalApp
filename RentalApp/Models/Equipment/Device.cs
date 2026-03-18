@@ -11,8 +11,8 @@ public abstract class Device
     protected Device(string name)
     {
         _idCounter++;
-        Name = name;
         Id = _idCounter;
+        Name = name;
         IsAvailable = true;
     }
 }
