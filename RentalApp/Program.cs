@@ -1,6 +1,15 @@
-﻿using RentalApp.Models.Equipment;
+﻿using RentalApp.Services.DeviceService;
+using RentalApp.Services.Penalty;
+using RentalApp.Services.RentalService;
+using RentalApp.Services.UserService;
+using RentalApp.UI;
 
-var laptop = new Laptop("Dell XPS", 14.2, "Windows 11", 16);
-Console.WriteLine(laptop.IsAvailable); // true
-laptop.IsAvailable = false;
-Console.WriteLine(laptop.Id + ". " +  laptop.Name + " " + laptop.OperatingSystem + " " + laptop.Ram + " " + laptop.IsAvailable);
+// Inicjalizacja serwisów
+IPenaltyCalculator penaltyCalculator = new DailyPenaltyCalculator(5.00m);
+IDeviceService deviceService = new DeviceService();
+IUserService userService = new UserService();
+IRentalService rentalService = new RentalService(penaltyCalculator, deviceService);
+
+// Uruchomienie menu
+var menuHandler = new MenuHandler(userService, deviceService, rentalService);
+menuHandler.Start();
