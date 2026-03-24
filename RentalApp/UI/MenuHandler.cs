@@ -38,13 +38,13 @@ public class MenuHandler
                     new UserMenu(_userService).Show();
                     break;
                 case "2":
-                    //new DeviceMenu(_deviceService).Show();
+                    new DeviceMenu(_deviceService).Show();
                     break;
                 case "3":
-                    //new RentalMenu(_rentalService, _userService, _deviceService).Show();
+                    new RentalMenu(_rentalService, _userService, _deviceService).Show();
                     break;
                 case "4":
-                    //new ReportMenu(_rentalService, _deviceService).Show();
+                    //new ReportMenu(_rentalService, _deviceService, _userService).Show();
                     break;
                 case "0":
                     return;

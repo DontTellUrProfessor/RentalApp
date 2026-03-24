@@ -37,6 +37,11 @@ public class RentalService : IRentalService
         _rentals.Add(newRental);
         return newRental;
     }
+    
+    public Rental? GetRental(int id)
+    {
+        return _rentals.FirstOrDefault(r => r.Id == id);
+    }
 
     public decimal ReturnDevice(Rental rental)
     {
@@ -44,7 +49,6 @@ public class RentalService : IRentalService
         
         if(currentRental == null) throw new InvalidOperationException($"Brak numeru {rental.Id} na liście wypożyczeń");
         
-        _deviceService.GetDevice(currentRental.Device.Id);
         currentRental.ReturnDate = DateTime.Now;
         decimal penaltyFee = _penaltyCalculator.Calculate(currentRental);
         _deviceService.MarkAsAvailable(currentRental.Device.Id);
