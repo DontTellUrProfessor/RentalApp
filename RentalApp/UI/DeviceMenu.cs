@@ -32,10 +32,13 @@ public class DeviceMenu
                     AddLaptop();
                     break;
                 case "2":
+                    AddCamera();
                     break;
                 case "3":
                     AddBattery();
                     break;
+                case "0":
+                    return;
                 default:
                     Console.WriteLine("Nieznana opcja, spróbuj ponownie");
                     break;
@@ -77,6 +80,45 @@ public class DeviceMenu
             Console.ReadLine();
             return;
 
+        }
+    }
+
+    private void AddCamera()
+    {
+        while (true)
+        {
+            Console.Clear();
+            Console.WriteLine("=== Kamera ===");
+            Console.Write("Podaj nazwę: ");
+            var name = Console.ReadLine();
+            
+            Console.Write("Podaj ilość Mpix: ");
+            if (!int.TryParse(Console.ReadLine(), out int mpix))
+            {
+                Console.WriteLine("Podaj poprawną liczbę!");
+                continue; // wróć do początku pętli
+            }
+            
+            Console.Write("Podaj wartość X sensora (w mm): ");
+            if (!int.TryParse(Console.ReadLine(), out int sensorX))
+            {
+                Console.WriteLine("Podaj poprawną liczbę!");
+                continue; // wróć do początku pętli
+            }
+            
+            Console.Write("Podaj wartość Y sensora (w mm): ");
+            if (!int.TryParse(Console.ReadLine(), out int sensorY))
+            {
+                Console.WriteLine("Podaj poprawną liczbę!");
+                continue; // wróć do początku pętli
+            }
+            
+            _deviceService.AddDevice(new Camera(name, mpix, sensorX, sensorY));
+            
+            Console.WriteLine($"Dodano kamerę: {name}");
+            Console.WriteLine("Naciśnij enter aby kontynuować");
+            Console.ReadLine();
+            return;
         }
     }
 
@@ -134,6 +176,68 @@ public class DeviceMenu
         }
     }
 
+    private void MarkAsUnavailable()
+    {
+        while (true)
+        {
+            Console.Clear();
+            Console.WriteLine("=== Oznacz jako niedostępne ===");
+            Console.Write("Podaj Id urządzenia: ");
+            
+            if (!int.TryParse(Console.ReadLine(), out int id))
+            {
+                Console.WriteLine("Podaj poprawną liczbę!");
+                continue; // wróć do początku pętli
+            }
+            
+            var device = _deviceService.GetDevice(id);
+            if (device == null)
+            {
+                Console.WriteLine($"Urządzenie o Id {id} nie istnieje!");
+                continue;
+            }
+            
+            var name = device.Name;
+            
+            _deviceService.MarkAsUnavailable(id);
+            Console.WriteLine($"Urządzenie {id} : {name} zostało ustawione jako niedostępne");
+            Console.WriteLine("Naciśnij enter aby kontynuować");
+            Console.ReadLine();
+            return;
+        }
+    }
+    
+    private void MarkAsAvailable()
+    {
+        while (true)
+        {
+            Console.Clear();
+            Console.WriteLine("=== Oznacz jako dostępne ===");
+            Console.Write("Podaj Id urządzenia: ");
+            
+            if (!int.TryParse(Console.ReadLine(), out int id))
+            {
+                Console.WriteLine("Podaj poprawną liczbę!");
+                continue; // wróć do początku pętli
+            }
+            
+            var device = _deviceService.GetDevice(id);
+            if (device == null)
+            {
+                Console.WriteLine($"Urządzenie o Id {id} nie istnieje!");
+                continue;
+            }
+            
+            var name = device.Name;
+            
+            _deviceService.MarkAsAvailable(id);
+            Console.WriteLine($"Urządzenie {id} : {name} zostało ustawione jako dostepne");
+            Console.WriteLine("Naciśnij enter aby kontynuować");
+            Console.ReadLine();
+            return;
+        }
+    }
+
     public void Show()
     {
         while (true)
@@ -154,10 +258,10 @@ public class DeviceMenu
                     AddDevice();
                     break;
                 case "2":
+                    MarkAsUnavailable();
                     break;
                 case "3":
-                    break;
-                case "4":
+                    MarkAsAvailable();
                     break;
                 case "0":
                     return;
