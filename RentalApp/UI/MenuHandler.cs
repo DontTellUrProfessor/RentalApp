@@ -44,7 +44,7 @@ public class MenuHandler
                     new RentalMenu(_rentalService, _userService, _deviceService).Show();
                     break;
                 case "4":
-                    //new ReportMenu(_rentalService, _deviceService, _userService).Show();
+                    new ReportMenu(_rentalService, _deviceService, _userService).Show();
                     break;
                 case "0":
                     return;
