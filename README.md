@@ -37,14 +37,14 @@ RentalApp/
 │   │   ├── Device.cs           # Abstrakcyjna klasa bazowa dla sprzętu
 │   │   ├── Laptop.cs           # Laptop z polami: ScreenSize, OperatingSystem, Ram
 │   │   ├── Camera.cs           # Kamera z polami: Mpix, SensorX, SensorY
-│   │   ├── Battery.cs          # Bateria z polami: Capacity, InputType, OutputType
-│   │   └── ConnectorType.cs    # Enum typów złączy USB
+│   │   └── Battery.cs          # Bateria z polami: Capacity, InputType, OutputType
 │   ├── Users/
 │   │   ├── User.cs             # Abstrakcyjna klasa bazowa dla użytkowników
 │   │   ├── Student.cs          # Student z limitem 2 wypożyczeń
 │   │   └── Employee.cs         # Pracownik z limitem 5 wypożyczeń
 │   ├── Enums/
-│   │   └── UserType.cs         # Enum typów użytkowników
+│   │   ├── UserType.cs         # Enum typów użytkowników
+│   │   └── ConnectorType.cs    # Enum typów złączy USB
 │   └── Rentals/
 │       └── Rental.cs           # Model pojedynczego wypożyczenia
 ├── Services/
