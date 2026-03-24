@@ -49,7 +49,8 @@ public class MenuHandler
                 case "0":
                     return;
                 default:
-                    Console.WriteLine("Nieznana opcja");
+                    Console.WriteLine("Nieznana opcja!! Wciśnij Enter aby kontynuować");
+                    Console.ReadLine();
                     break;
             }
         }
